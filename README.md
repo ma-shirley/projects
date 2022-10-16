@@ -1,19 +1,24 @@
-A number game with some wordle flavor.
+# A number game with some wordle flavor.
 
-The secret numbers have four distinct digits.
+<b>The secret numbers have four distinct digits.</b>
 
 Example: 
 
 secret number = 1234
-guess 1342 -> 1 green, 3 yellow
-guess 5678 -> 0 green, 0 yellow
-guess 1278 -> 2 green, 0 yellow
-guess 1234 -> 4 green, 0 yellow -> you won!
+
+5678 -> 0 green, 0 yellow
+
+1278 -> 2 green, 0 yellow
+
+1342 -> 1 green, 3 yellow
+
+1234 -> 4 green, 0 yellow -> you won!
 
 
 ===========================
+
 This repo is a fork of <https://github.com/fabricio3g/wordle-clone>. 
-# Wordle with Vanilla JavaScript
+Wordle with Vanilla JavaScript
 
 A simple wordle interface written in Vanilla JavaScript. To run the game locally:
 
