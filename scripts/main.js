@@ -92,13 +92,25 @@ function renderResult(e) {
   const guess = charArray.join("");
   // Check if it is correct
   if (guess == NUM_ANSWER) {
+    if (guessCount == 0) {
+      messege.innerHTML = `<p class="bg-black border border-green-600 w-80 rounded text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-lg text-center messeges p-5 shadow">
+      You won with just 1 attempt!  <br/>
+      <button  onclick=location.reload() class='bg-white text-green-600 hover:text-green-800 hover:bg-gray-200 py-2 px-2 m-0.5 rounded w-50 cursor-pointer'>Play again</button>
+      </p>`;
+      currentCharIdx = 0; 
+    }
+    else {
     messege.innerHTML = `<p class="bg-black border border-green-600 w-80 rounded text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-lg text-center messeges p-5 shadow">
-                You win <br/>
+                You won with ${guessCount+1} attempts! <br/>
                 <button  onclick=location.reload() class='bg-white text-green-600 hover:text-green-800 hover:bg-gray-200 py-2 px-2 m-0.5 rounded w-50 cursor-pointer'>Play again</button>
                 </p>`;
     currentCharIdx = 0;
+    }
+    const result = checkNumber(guess, NUM_ANSWER);
+    correctbox[guessCount].innerHTML = result[0];
+    almostbox[guessCount].innerHTML = result[1];  
   }
-
+  else {
   const result = checkNumber(guess, NUM_ANSWER);
   correctbox[guessCount].innerHTML = result[0];
   almostbox[guessCount].innerHTML = result[1];
@@ -108,11 +120,12 @@ function renderResult(e) {
 
   if (guessCount == 9) {
     messege.innerHTML = `<p class="bg-black border border-green-600 w-80 rounded text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-lg text-center messeges p-5 shadow">
-                You lost <br/>
+                You lost :( <br/>
                 <span class="text-white">The secret number is: <b>${num}</b><span/><br/>
                 <button onclick=location.reload() class='restar  bg-white text-green-600 hover:text-green-800 hover:bg-gray-200 py-2 px-2 m-0.5 rounded w-50 cursor-pointer'>Play again</button>
                 </p>`;
   }
+}
 }
 
 // Event handlers
@@ -121,7 +134,9 @@ function handleKeyPress(e) {
   if (e.keyCode >= 49 && e.keyCode <= 57) {
     addLetter(e);
   } else if (e.key === "Enter") {
-    renderResult();
+    if (currentCharIdx == 4) {
+      renderResult();
+    }
   } else if (e.key === "Backspace") {
     removeLetter();
   }
